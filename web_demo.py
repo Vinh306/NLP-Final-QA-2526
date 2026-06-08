@@ -252,15 +252,6 @@ body { font-family: 'Be Vietnam Pro', 'Segoe UI', sans-serif !important; }
 }
 """
 
-SUGGESTED_QUESTIONS = [
-    "Sinh viên bị cảnh báo học vụ khi nào?",
-    "Điều kiện nhận học bổng khuyến khích là gì?",
-    "Vi phạm quy chế thi cử bị xử lý ra sao?",
-    "Điều kiện xét tốt nghiệp là gì?",
-    "Số tín chỉ tối thiểu mỗi học kỳ là bao nhiêu?",
-    "Quy định về điểm rèn luyện như thế nào?",
-]
-
 
 # BUILD UI
 def build_demo():
@@ -332,10 +323,6 @@ def build_demo():
                 send_btn  = gr.Button("Gửi ▶", variant="primary", elem_id="send-btn")
                 clear_btn = gr.Button("🗑 Xóa", variant="secondary")
 
-        # Suggest
-        gr.HTML('<p style="font-size:11px;color:#bbb;margin:7px 0 3px;">💡 Câu hỏi gợi ý:</p>')
-        with gr.Row():
-            sq_btns = [gr.Button(q, size="sm", elem_classes="sq-btn") for q in SUGGESTED_QUESTIONS]
 
         # Wiring
         submit_in  = [question_box, panels["A"], panels["B"], panels["C"], panels["D"], cb_A, cb_B, cb_C, cb_D]
@@ -345,8 +332,6 @@ def build_demo():
         question_box.submit(fn=respond, inputs=submit_in, outputs=submit_out)
         clear_btn.click(fn=clear_all, outputs=submit_out)
 
-        for sq_btn, q in zip(sq_btns, SUGGESTED_QUESTIONS):
-            sq_btn.click(fn=lambda x=q: x, outputs=question_box)
 
     return demo
 
